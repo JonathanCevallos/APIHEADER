@@ -39,7 +39,7 @@ public class ListadoActivity extends AppCompatActivity {
 
     private void GETVolley(){
         String llave="F2HPyB8C8f2XDadCHaahczA5GPGYg0S3cLbi7hMC";
-        String DATA_URL = "https://api.nasa.gov/planetary/apod?api_key=F2HPyB8C8f2XDadCHaahczA5GPGYg0S3cLbi7hMC"+llave;
+        String DATA_URL = "https://api.nasa.gov/planetary/apod?api_key=F2HPyB8C8f2XDadCHaahczA5GPGYg0S3cLbi7hMC";
         String URL="https://api.nasa.gov/planetary/apod";
         final ProgressDialog loading = ProgressDialog.show(this, "Por favor espere...", "Actualizando datos",false,false);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, DATA_URL, null, new Response.Listener<JSONObject>() {
@@ -59,9 +59,8 @@ public class ListadoActivity extends AppCompatActivity {
             @Override
             public Map getHeaders() throws AuthFailureError {
                 HashMap headers = new HashMap();
-                headers.put("Content-Type", "application/json");
                 //  headers.put("name", "public-merchant-id");
-                headers.put("Public-Merchant-Id", "84e1d0de1fbf437e9779fd6a52a9ca18");
+                headers.put("PrivateKey", "84e1d0de1fbf437e9779fd6a52a9ca18");
                 return headers;
             }
         };
