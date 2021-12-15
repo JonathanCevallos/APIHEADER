@@ -36,11 +36,9 @@ public class ListadoActivity extends AppCompatActivity {
         //mQueue = Volley.newRequestQueue(this);
         GETVolley();
     }
-
+//Llamado HTTP para solicitar la Data
     private void GETVolley(){
-        String llave="F2HPyB8C8f2XDadCHaahczA5GPGYg0S3cLbi7hMC";
-        String DATA_URL = "https://api.nasa.gov/planetary/apod?api_key=F2HPyB8C8f2XDadCHaahczA5GPGYg0S3cLbi7hMC";
-        String URL="https://api.nasa.gov/planetary/apod";
+        String DATA_URL = "https://api-uat.kushkipagos.com/transfer/v1/bankList";
         final ProgressDialog loading = ProgressDialog.show(this, "Por favor espere...", "Actualizando datos",false,false);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, DATA_URL, null, new Response.Listener<JSONObject>() {
             @Override
@@ -60,7 +58,7 @@ public class ListadoActivity extends AppCompatActivity {
             public Map getHeaders() throws AuthFailureError {
                 HashMap headers = new HashMap();
                 //  headers.put("name", "public-merchant-id");
-                headers.put("PrivateKey", "84e1d0de1fbf437e9779fd6a52a9ca18");
+                headers.put("Public-Merchant-Id", "84e1d0de1fbf437e9779fd6a52a9ca18");
                 return headers;
             }
         };
@@ -69,18 +67,15 @@ public class ListadoActivity extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
-
+//Parseamos los datos del JSON
     private void showListView(JSONObject obj){
         try {
             List<String> contes = new ArrayList<String>();
             JSONArray lista = obj.optJSONArray("data");
             for(int i=0; i<lista.length();i++){
                 JSONObject json_data = lista.getJSONObject(i);
-                String conte =  "Codigo: " + json_data.getString("id")+"\n"+
-                        "Nombre: " + json_data.getString("name")+"\n"+
-                        "Email: "  + json_data.getString("email")+"\n"+
-                        "Genero: " + json_data.getString("gender")+"\n"+
-                        "Estado: " + json_data.getString("status")+"\n\n";;
+                String conte =  "Codigo: " + json_data.getString("code")+"\n"+
+                        "Banco: " + json_data.getString("name")+"\n\n";;
                 contes.add(conte);
             }
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,contes);
