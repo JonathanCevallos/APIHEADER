@@ -53,11 +53,11 @@ public class ListadoActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Error request:"+error.getMessage(),Toast.LENGTH_LONG).show();
             }
         }) {
-            //@org.jetbrains.annotations.NotNull
+            //Hacemos PUT en el emcabezado para agregar el Token de acceso
             @Override
             public Map getHeaders() throws AuthFailureError {
                 HashMap headers = new HashMap();
-                //  headers.put("name", "public-merchant-id");
+                //headers.put("name", "public-merchant-id");
                 headers.put("Public-Merchant-Id", "84e1d0de1fbf437e9779fd6a52a9ca18");
                 return headers;
             }
